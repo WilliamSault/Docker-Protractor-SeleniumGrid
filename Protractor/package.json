@@ -1,0 +1,14 @@
+{
+  "name": "protractor-seleniumgird",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "Tests/conf.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "protractor": "^5.4.0"
+  }
+}

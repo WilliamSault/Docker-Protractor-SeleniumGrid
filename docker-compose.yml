@@ -1,0 +1,52 @@
+#Mainter : Promode
+version: '2'
+
+services:
+    progrid:
+        image: selenium/hub
+        container_name: progrid
+        privileged: true
+        ports:
+            - 4444:4444
+        environment:
+            - GRID_TIMEOUT=240000
+            - GRID_BROWSER_TIMEOUT=240000
+        networks:
+            - progrid_grid_internal
+
+    nodechrome:
+        container_name: chormenode
+        image: selenium/node-chrome-debug
+        privileged: true
+        depends_on:
+            - progrid
+        ports:
+            - 5901:5900
+        environment:
+            - no_proxy=localhost
+            - TZ=Europe/London
+            - HUB_PORT_4444_TCP_ADDR=progrid
+            - HUB_PORT_4444_TCP_PORT=4444
+            - VNC_NO_PASSWORD=1
+        networks:
+            - progrid_grid_internal
+
+    nodefirefox:
+        image: selenium/node-firefox-debug
+        container_name: firefoxnode
+        privileged: true
+        depends_on:
+            - progrid
+        ports:
+            - 5902:5901  
+        environment:
+            - no_proxy=localhost
+            - TZ=Europe/London
+            - HUB_PORT_4444_TCP_ADDR=progrid
+            - HUB_PORT_4444_TCP_PORT=4444
+            - VNC_NO_PASSWORD=1
+        networks:
+            - progrid_grid_internal
+
+networks:
+    progrid_grid_internal:
