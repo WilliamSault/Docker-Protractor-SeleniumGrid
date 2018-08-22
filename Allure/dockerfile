@@ -1,13 +1,14 @@
-FROM openjdk:8-jre
+FROM openjdk:8-jre-alpine
 
 COPY allure-2.7.0.tgz /
 
 RUN mkdir -p /allure-results 
 
-RUN apt-get update \
-    && apt-get install tar \
+RUN apk update \
+    && apk add tar \
     && tar -xvf allure-2.7.0.tgz \
-    && chmod -R +x /allure-2.7.0/
+    && chmod -R +x /allure-2.7.0/ \
+    && rm -f allure-2.7.0.tgz
 
 WORKDIR /allure-2.7.0/bin
 
