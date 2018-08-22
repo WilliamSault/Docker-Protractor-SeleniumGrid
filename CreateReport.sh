@@ -1,1 +1,0 @@
-docker container run --rm -d --name allure -p 8800:8800 -v  "${PWD}/Protractor/Tests/allure-results":/allure-results williamsault/allure

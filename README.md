@@ -14,11 +14,7 @@ First, you need to run the selenium server by executing the docker-compose file 
 docker-compose
 ```
 
-This will now spin up the selenium server with a chrome and firefox node. The selenium server is exposed on server at port 4444 by default but this can be changed in docker-compose.yml. Next, we can run the tests from another terminal:
-
-```bash
-docker container run --rm --network="host" --name protractor williamsault/protractor:latest
-```
+This will now spin up the selenium server with a chrome and firefox node. The selenium server is exposed on server at port 4444 by default but this can be changed in docker-compose.yml.
 
 ## Running your own tests
 
@@ -28,11 +24,14 @@ You can of course run your own scripts. To do this map the volume `/usr/src/app/
 docker container run --rm --network="host" -v "$(PWD)/Protractor/Tests":/usr/src/app/Tests williamsault/protractor:latest
 ```
 
-or by running the included shell script
+Tests results can be visualised through Allure.
 
 ```bash
-sh RunTests.sh
+docker container run --rm -d --name allure -p 8800:8800 -v  "${PWD}/Protractor/Tests/allure-results":/allure-results williamsault/allure
 ```
+
+You can do this by running the shell script `RunTests.sh`
+
 ## Visulising the tests
 
 An extra option is to visualise the test cases being ran. To do this you need a [VNC viewer](https://chrome.google.com/webstore/detail/vnc%C2%AE-viewer-for-google-ch/iabmpiboiopbgfabjmgeedhcmjenhbla?hl=en). I recommend using the chrome extension for ease of use.
