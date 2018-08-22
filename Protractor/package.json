@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "Tests/conf.js"
+    "pretest": "rm -rf Tests/allure-report",
+    "test": "protractor Tests/conf.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "protractor": "^5.4.0"
+  },
+  "devDependencies": {
+    "jasmine-allure-reporter": "^1.0.2"
   }
 }

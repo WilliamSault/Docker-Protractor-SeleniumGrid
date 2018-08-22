@@ -1,0 +1,18 @@
+FROM openjdk:8-jre
+
+COPY allure-2.7.0.tgz /
+
+RUN mkdir -p /allure-results 
+
+RUN apt-get update \
+    && apt-get install tar \
+    && tar -xvf allure-2.7.0.tgz \
+    && chmod -R +x /allure-2.7.0/
+
+WORKDIR /allure-2.7.0/bin
+
+VOLUME ["/allure-results"]
+
+EXPOSE 8800
+
+CMD [ "./allure","serve","/allure-results","-p","8800" ]

@@ -25,4 +25,4 @@ RUN chmod -R 777 .
 VOLUME [ "/usr/src/app/Tests" ]
 
 EXPOSE 8080
-CMD protractor Tests/conf.js
+CMD [ "npm", "test" ]
